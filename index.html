@@ -1,7 +1,7 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>测试工具箱 · wanghaian</title>
 <style>
 *{box-sizing:border-box} :root{color-scheme:light;--line:#d6d6d6;--gray:#626262;color:#191919;background:white;font:16px Inter,"PingFang SC","Microsoft YaHei",sans-serif}
-body{margin:0}main{max-width:1120px;margin:auto;padding:0 40px 50px}header,.heading,.controls,.demo,.actions{display:flex;align-items:center}.top{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);height:56px;color:var(--gray);font:13px ui-monospace,monospace}.dot{width:10px;height:10px;background:#202020;box-shadow:inset -3px -3px white;border:1px solid}
+body{margin:0}main{max-width:1120px;margin:auto;padding:0 40px 50px}header,.heading,.demo,.actions{display:flex;align-items:center}.top{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);height:56px;color:var(--gray);font:13px ui-monospace,monospace}.dot{width:10px;height:10px;background:#202020;box-shadow:inset -3px -3px white;border:1px solid}
 header{justify-content:space-between;min-height:190px;border-bottom:1px solid var(--line);gap:12px}
 h1{font-size:clamp(35px,6vw,74px);line-height:1.1;letter-spacing:-.065em;margin:0}
 button,select{font:inherit;color:inherit;background:white;border:1px solid #aaa;cursor:pointer;border-radius:3px}
@@ -10,28 +10,34 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid blac
 canvas{width:100%;height:100%;image-rendering:pixelated}
 .hint{position:absolute;bottom:0;right:0;background:white;padding:2px 5px;color:var(--gray);font-size:11px}
 .heading{justify-content:space-between;margin:29px 0 14px}h2{font-size:19px;margin:0;letter-spacing:-.04em}
-.controls,.actions{gap:8px}.controls button{width:35px;height:32px}.controls button:disabled{opacity:.35;cursor:default}
-.strip{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:3px 3px 12px;scrollbar-width:thin;scrollbar-color:#c0c0c0 #fafafa}
-.card{position:relative;flex:0 0 calc((100% - 42px)/3.35);min-width:195px;scroll-snap-align:start;display:flex;flex-direction:column;align-items:flex-start;min-height:158px;border:1px solid var(--line);padding:16px 19px 20px;color:inherit;text-decoration:none;border-radius:3px}
-.card:hover,button:not(:disabled):hover{background:#f6f6f6;border-color:#777}.category{font-size:12px;color:var(--gray)}.mark{font:26px/1 ui-monospace,monospace;margin:25px 0 14px}.corner{position:absolute;right:16px;top:13px;color:#666}.card strong{font-size:17px}
+.actions{gap:8px}
+.grid,.panel-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.panel{margin-top:14px;border:1px solid var(--line);border-radius:3px;padding:16px 19px}
+.panel h3{margin:0 0 12px;font-size:16px}
+.panel-links{gap:0;border-top:1px solid var(--line)}
+.panel-links a{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:10px;color:inherit;text-decoration:none;font-size:14px}
+.panel-links a+a{border-left:1px solid var(--line)}
+.panel-links a:hover{background:#f6f6f6}
+.card{position:relative;min-width:0;display:flex;flex-direction:column;align-items:flex-start;min-height:120px;border:1px solid var(--line);padding:16px 19px 20px;color:inherit;text-decoration:none;border-radius:3px}
+.card:hover,button:not(:disabled):hover{background:#f6f6f6;border-color:#777}.category{font-size:12px;color:var(--gray)}.mark{font:26px/1 ui-monospace,monospace;margin:13px 0 8px}.corner{position:absolute;right:16px;top:13px;color:#666}.card strong{font-size:17px;overflow-wrap:anywhere}
 .demo{border:1px solid var(--line);padding:20px 22px;gap:22px;justify-content:space-between;border-radius:3px}.demo h3{font-size:16px;margin:0 0 6px}.demo p{margin:0;font-size:13px;color:var(--gray)}.actions{flex-wrap:wrap}select,.run{padding:8px 10px;font-size:14px}.run{background:#242424;color:white;border-color:#242424}.actions .run:hover{background:#454545}output{display:block;margin-top:8px;font:13px ui-monospace,monospace;color:#555;min-height:16px}
-@media(max-width:680px){main{padding:0 18px 32px}.top{height:44px}header{min-height:156px}.orchard{width:120px;height:110px}.card{flex-basis:76%;min-height:145px}.demo{align-items:flex-start;flex-direction:column;gap:16px}.heading{margin-top:22px}}
+@media(max-width:680px){main{padding:0 18px 32px}.top{height:44px}header{min-height:156px}.orchard{width:120px;height:110px}.card{min-height:125px;padding:14px}.demo{align-items:flex-start;flex-direction:column;gap:16px}.heading{margin-top:22px}}
 </style></head><body><main>
 <div class="top"><span class="dot" aria-hidden="true"></span>wanghaian.github.io</div>
 <header><h1>测试工具箱</h1><button class="orchard" aria-label="摇落像素李子"><canvas width="120" height="88" aria-hidden="true"></canvas><span class="hint">点一下，摇李子</span></button></header>
-<section><div class="heading"><h2>工具导航</h2><div class="controls"><button id="prev" aria-label="向前滚动卡片">←</button><button id="next" aria-label="向后滚动卡片">→</button></div></div><nav class="strip" aria-label="测试工具"><a class="card" href="http://47.107.92.182/dashboard"><span class="category">测试用例</span><span class="mark" aria-hidden="true">☑</span><strong>用例平台</strong><span class="corner" aria-hidden="true">↗</span></a>
+<section><div class="heading"><h2>工具导航</h2></div><nav class="grid" aria-label="测试工具"><a class="card" href="http://47.107.92.182/dashboard"><span class="category">测试用例</span><span class="mark" aria-hidden="true">☑</span><strong>用例平台</strong><span class="corner" aria-hidden="true">↗</span></a>
 <a class="card" href="http://47.107.92.182:8080/#overview"><span class="category">供应商模拟</span><span class="mark" aria-hidden="true">✈</span><strong>机票 Mock 供应商后台</strong><span class="corner" aria-hidden="true">↗</span></a>
 <a class="card" href="http://47.107.92.182:8058/"><span class="category">业务排查</span><span class="mark" aria-hidden="true">⌕</span><strong>机票业务排查工具平台</strong><span class="corner" aria-hidden="true">↗</span></a>
 <a class="card" href="http://47.112.31.9:3000/projects"><span class="category">自动化项目</span><span class="mark" aria-hidden="true">›_</span><strong>自动化测试平台</strong><span class="corner" aria-hidden="true">↗</span></a>
-<a class="card" href="http://47.107.92.182:28680/"><span class="category">服务器管理</span><span class="mark" aria-hidden="true">▤</span><strong>测试组 1Panel 后台</strong><span class="corner" aria-hidden="true">↗</span></a>
-<a class="card" href="http://47.112.31.9:28680/69b3a08dcb"><span class="category">服务器管理</span><span class="mark" aria-hidden="true">▤</span><strong>自动化测试平台专用 1Panel 后台</strong><span class="corner" aria-hidden="true">↗</span></a></nav></section>
+</nav>
+<div class="panel"><h3 id="panel-heading">1Panel 服务器管理</h3>
+<nav class="panel-links" aria-labelledby="panel-heading">
+<a href="http://47.107.92.182:28680/">测试组后台 <span aria-hidden="true">↗</span></a>
+<a href="http://47.112.31.9:28680/69b3a08dcb">自动化测试平台专用后台 <span aria-hidden="true">↗</span></a>
+</nav></div></section>
 <section><div class="heading"><h2>交互演示</h2></div><div class="demo"><div><h3>机票 Mock 响应</h3><p>选择供应商返回的结果，在本地模拟一次请求。</p></div><div><div class="actions"><select aria-label="模拟结果"><option>报价成功</option><option>无可售舱位</option><option>供应商超时</option></select><button class="run">模拟请求</button></div><output aria-live="polite">等待请求</output></div></div></section>
 </main><script>
-const strip=document.querySelector('.strip'), prev=document.querySelector('#prev'), next=document.querySelector('#next');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-function update(){prev.disabled=strip.scrollLeft<2;next.disabled=strip.scrollLeft+strip.clientWidth>=strip.scrollWidth-2}
-function move(direction){strip.scrollBy({left:direction*(strip.children[1].offsetLeft-strip.children[0].offsetLeft),behavior:reduced.matches?'instant':'smooth'})}
-prev.onclick=()=>move(-1);next.onclick=()=>move(1);strip.addEventListener('scroll',update);new ResizeObserver(update).observe(strip);update();
 const run=document.querySelector('.run'),out=document.querySelector('output'),select=document.querySelector('select');
 run.onclick=()=>{const results=['200 · 已返回模拟报价 CNY 680','200 · 当前航班无可售舱位','504 · 供应商响应超时'];const result=results[select.selectedIndex];run.disabled=true;select.disabled=true;out.textContent='请求中…';setTimeout(()=>{out.textContent=result;run.disabled=false;select.disabled=false},480)};
 const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d');
