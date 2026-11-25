@@ -14,7 +14,7 @@ button:focus-visible,a:focus-visible{outline:2px solid black;outline-offset:2px}
 
 .grid,.panel-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .panel{margin-top:14px;border:1px solid var(--line);border-radius:3px;padding:16px 19px}
-.panel h3{margin:0 0 12px;font-size:16px}
+.panel h3,.panel h2{margin:0 0 12px;font-size:16px}
 .panel-links{gap:0;border-top:1px solid var(--line)}
 .panel-links a{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:10px;color:inherit;text-decoration:none;font-size:14px}
 .panel-links a+a{border-left:1px solid var(--line)}
@@ -36,6 +36,11 @@ button:focus-visible,a:focus-visible{outline:2px solid black;outline-offset:2px}
 <a target="_blank" rel="noopener noreferrer" href="http://47.107.92.182:28680/">测试组后台 <span aria-hidden="true">↗</span></a>
 <a target="_blank" rel="noopener noreferrer" href="http://47.112.31.9:28680/69b3a08dcb">自动化测试平台专用后台 <span aria-hidden="true">↗</span></a>
 </nav></div></section>
+<section class="panel" aria-labelledby="third-party-heading">
+<h2 id="third-party-heading">第三方工具</h2>
+<nav class="panel-links" aria-labelledby="third-party-heading">
+<a href="https://tempmail.cn/" target="_blank" rel="noopener noreferrer">临时邮箱 <span aria-hidden="true">↗</span></a>
+</nav></section>
 </main><script>
 const button = document.querySelector('.tart');
 const tart = button.querySelector('img');
